@@ -1,0 +1,6 @@
+[
+  {
+    "Name": "primary",
+    "URL": "unix:///var/run/docker.sock"
+  }
+]

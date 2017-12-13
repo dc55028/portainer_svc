@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+#  rpi_monitor:
+#    image: neoraptor/rpi-monitor
+#    privileged: true
+#    ports:
+#      - "80:8888"
+#    restart: unless-stopped
+
+  portainer:
+    image: portainer/portainer
+    ports:
+      - "80:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/portainer/data:/data
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    secrets:                    # secrets block only for 'web' service
+      - portainer_password
+    command: --admin-password-file '/run/secrets/portainer_password'  --external-endpoints '/data/endpoints.json'
